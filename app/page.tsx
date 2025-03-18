@@ -10,9 +10,13 @@ import ChannelAnalytics from './components/dashboard/ChannelAnalytics';
 import BudgetPlanning from './components/dashboard/BudgetPlanning';
 import CampaignManagement from './components/dashboard/CampaignManagement';
 import PerformanceMetrics from './components/dashboard/PerformanceMetrics';
+import EcommerceMetrics from './components/dashboard/EcommerceMetrics';
+import KasperskyInsights from './components/dashboard/KasperskyInsights';
 
 const sections = [
   { id: 'overview', name: 'Overview' },
+  { id: 'ecommerce', name: 'Ecommerce' },
+  { id: 'kaspersky', name: 'Kaspersky' },
   { id: 'performance', name: 'Performance' },
   { id: 'campaigns', name: 'Campaigns' },
   { id: 'budget', name: 'Budget' }
@@ -20,6 +24,128 @@ const sections = [
 
 export default function Home() {
   const [activeSection, setActiveSection] = React.useState('overview');
+
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'overview':
+        return (
+          <Grid numItems={1} numItemsSm={2} numItemsLg={3} className="gap-6">
+            <Col numColSpan={1} numColSpanSm={2} numColSpanLg={3}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <PerformanceMetrics />
+              </motion.div>
+            </Col>
+
+            <Col numColSpan={1} numColSpanSm={2} numColSpanLg={2}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="h-full"
+              >
+                <Card className="h-full">
+                  <StrategyOverview />
+                </Card>
+              </motion.div>
+            </Col>
+
+            <Col numColSpan={1}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="h-full"
+              >
+                <Card className="h-full">
+                  <RegionalPerformance />
+                </Card>
+              </motion.div>
+            </Col>
+          </Grid>
+        );
+      
+      case 'ecommerce':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <EcommerceMetrics />
+          </motion.div>
+        );
+      
+      case 'kaspersky':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <KasperskyInsights />
+          </motion.div>
+        );
+      
+      case 'performance':
+        return (
+          <Grid numItems={1} numItemsSm={2} className="gap-6">
+            <Col numColSpan={1} numColSpanSm={2}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <PerformanceMetrics />
+              </motion.div>
+            </Col>
+            <Col numColSpan={1}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Card className="h-full">
+                  <ChannelAnalytics />
+                </Card>
+              </motion.div>
+            </Col>
+          </Grid>
+        );
+      
+      case 'campaigns':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <Card className="h-full">
+              <CampaignManagement />
+            </Card>
+          </motion.div>
+        );
+      
+      case 'budget':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <Card>
+              <BudgetPlanning />
+            </Card>
+          </motion.div>
+        );
+      
+      default:
+        return null;
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -68,87 +194,7 @@ export default function Home() {
 
         {/* Main Content */}
         <div className="px-6 py-8 max-w-7xl mx-auto">
-          <Grid numItems={1} numItemsSm={2} numItemsLg={3} className="gap-6">
-            {/* Performance Metrics - Full Width */}
-            <Col numColSpan={1} numColSpanSm={2} numColSpanLg={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                <PerformanceMetrics />
-              </motion.div>
-            </Col>
-
-            {/* Strategy Overview */}
-            <Col numColSpan={1} numColSpanSm={2} numColSpanLg={2}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="h-full"
-              >
-                <Card className="h-full">
-                  <StrategyOverview />
-                </Card>
-              </motion.div>
-            </Col>
-
-            {/* Regional Performance */}
-            <Col numColSpan={1}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="h-full"
-              >
-                <Card className="h-full">
-                  <RegionalPerformance />
-                </Card>
-              </motion.div>
-            </Col>
-
-            {/* Campaign Management */}
-            <Col numColSpan={1} numColSpanSm={2} numColSpanLg={2}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="h-full"
-              >
-                <Card className="h-full">
-                  <CampaignManagement />
-                </Card>
-              </motion.div>
-            </Col>
-
-            {/* Channel Analytics */}
-            <Col numColSpan={1}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="h-full"
-              >
-                <Card className="h-full">
-                  <ChannelAnalytics />
-                </Card>
-              </motion.div>
-            </Col>
-
-            {/* Budget Planning - Full Width */}
-            <Col numColSpan={1} numColSpanSm={2} numColSpanLg={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <Card>
-                  <BudgetPlanning />
-                </Card>
-              </motion.div>
-            </Col>
-          </Grid>
+          {renderContent()}
         </div>
       </motion.div>
     </DashboardLayout>
